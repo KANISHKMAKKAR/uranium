@@ -1,4 +1,3 @@
-
 let endpoint = 'https://www.google.com'
 
 let log = function() {
@@ -12,5 +11,3 @@ let obj = {
 
 module.exports.endpoint = endpoint
 module.exports.logging = log
-
-
