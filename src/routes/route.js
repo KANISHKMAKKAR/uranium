@@ -1,8 +1,8 @@
 const express = require('express');
 const logger = require('./logger')
-
+const addd = require("../controllers/control")
 const router = express.Router();
-let movie = ['AVENGERS','infinity war','endgame','wintersoldier','civil war','nowayhome']
+let movie = ['AVENGERS','infinity war','endgame','wintersoldier','civil war',"  KANISHK MAKKAR"]
 let film=[ {
     id: 1,
     name: 'The Shining'
@@ -19,6 +19,10 @@ let film=[ {
     id: 4,
     name: 'Finding Nemo'
    }]
+
+
+
+   
    
 // router.get('/user-profile/:abcd', function(req, res) {
 //     console.log(req)
@@ -61,5 +65,41 @@ router.get('/movies/:indexnumber',function (req, res){
     
     
        })
+       router.get('/films',function(req,res){
+           res.send(film)
+       })
+    //    router.get('/array', function (req,res)
+    //    {let a = [1,2,3,4,5,7,8,9]
+    //     let n = a[a.length-1]
+    //     let sum = (n * (n+1)/2)
+    //     let add = 0
+    //     for (let i = 0 ; i < a.length;i++ ){
+    //         add = add + a[i]
+    //     }
+    //     let missingno = sum - add;
+    //     // console.log(missingno)
+           
+    //        res.send('missingno',missingno) 
+
+    //    })
+
+    router.get('/assign',function (req,res){
+        let ab = [32,33,34,35,37,38]
+let sum =0
+for (let i = 0; i < ab.length; i++) {
+ sum = sum + ab[i]
+}
+let b = ((ab.length+1)/2) *(2*ab[0] + (ab.length)) - sum
+let c = b
+console.log("KANISHK")
+    })
+    
+    router.post('/tesst',function (req, res){
+        console.log(req.body)
+        res.send ( {   msg : "KANISHK"  } )
+        });  
+
+        //write a post request to accept an element in post request body and add it to the given array and return the new array
+        router.post('/tesst1' , addd.addtoarray)
 
 module.exports = router;
