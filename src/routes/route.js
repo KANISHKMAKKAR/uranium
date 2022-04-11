@@ -8,14 +8,17 @@ router.post('/players', P.PLAYERS)
 
 router.post('/player', PL.PLAYER)
 
+const UserModel =require("../models/usermodelday16")
+const Usser=require('../controllers/mongoosecontrollerday16')
 
 
 
 
 
 
+router.post('/createuser', Usser.usser );
 
-
+router.get('/getuserdata', Usser.ggetuser);
 
 
 
