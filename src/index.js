@@ -17,6 +17,17 @@ mongoose.connect("mongodb+srv://functionup-uranium-cohort:q8znVj4ly0Fp0mpU@clust
 app.use('/', route);
 
 
+ app.use ( function (req ,res ){
+        console.log("THe global middleware that is accessible by all APIs")
+        
+        res.send("Over and OUT")
+        
+   
+    }
+)
+
+
+
 app.listen(process.env.PORT || 3000, function () {
     console.log('Express app running on port ' + (process.env.PORT || 3000))
 });
