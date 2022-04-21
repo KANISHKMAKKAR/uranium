@@ -77,3 +77,152 @@ For free app user, we dont check user's balance and create the order with 0 amou
 
 
 
+app.use(function(req, res, next) {
+    console.log('This is a global middleware')
+    //Adding a property in request object
+    req['current-day'] = 'Wednesday'
+    next()
+})
+const req = require("express/lib/request")
+const UserModel= require("../models/userModel")
+
+const basicCode= async function(req, res) {
+    let tokenDataInHeaders= req.headers.token
+    console.log(tokenDataInHeaders)
+    //counter
+    console.log( "HEADER DATA ABOVE")
+    console.log( "hey man, congrats you have reached the Handler")
+    res.send({ msg: "This is coming from controller (handler)"})
+    
+    }
+
+
+const createAUser = function(req, res) {
+    let requestBody = req.body
+    let headers  = req.headers
+    
+
+    //Printing all the headers before modification - addition of a new header called 'month'
+    console.log('Request headers are before: ', headers)
+
+    //Accessing a request header called 'batch'
+    let batchHeader = headers["batch"] // headers.batch 
+    
+    ///Accessing a request header called 'content-type'
+    let contentHeader = headers['content-type'] // headers.content-type
+
+    console.log('Content Type hedser is: ',contentHeader)
+    console.log('Batch header is: ', batchHeader)
+
+    //Adding a new requets header
+    req.headers["month"] = 'April' //req.headers.month = 'April' or req.headers["month"] = 'April'
+
+
+    //Printing the headers after modification - addition of a new header called 'month'
+    console.log('Request headers are after: ', headers)
+
+
+    console.log('Request property called current-day', req['current-day'])
+    
+    //Adding a response header
+    res.header('year', '2022')
+
+    res.send('Just create a user')
+}
+
+module.exports.createAUser = createAUser
+module.exports.basicCode = basicCode
+
+
+
+
+
+
+
+
+
+
+
+
+
+// const UserModel= require("../models/userModel.js")
+const UserController= require("../controllers/userController")
+//const BookController= require("../controllers/bookController")
+
+
+router.get("/test-me", function (req, res) {
+    res.send("My first ever api!")
+})
+
+
+// router.post("/createUser", UserController.createUser  )
+// router.get("/getUsersData", UserController.getUsersData)
+
+
+// const mid1= function ( req, res, next) {
+//     console.log("Hi I am a middleware named Mid1")
+//     // logic
+//     let loggedIn = false
+
+//     if (loggedIn== true) { 
+//         console.log( "OK LOGGED IS IS TRUE NOW")
+//         next ()
+//     }
+//     else {
+//         res.send ("Please login or register")
+//     }
+// }
+
+// // e.g. restricted and open-to-all API's can be handled like below now:
+// router.get('/homePage', mid1, UserController.feeds)
+// router.get('/profileDetails', mid1, UserController.profileDetails)
+// router.get('/friendList', mid1, UserController.friendList)
+// router.get('/changePassword', mid1, UserController.changePassword)
+
+// router.get('/termsAndConditions',  UserController.termsAndConditions)
+// router.get('/register',  UserController.register)
+
+
+
+
+
+router.get("/basicRoute", UserController.basicCode)
+router.post('/create-a-user', UserController.createAUser)
+
+
+
+// router.get("/basicRoute2", commonMW.mid1, UserController.basicCode2)
+// router.get("/basicRoute3", commonMW.mid2, UserController.basicCode3)
+// router.get("/basicRoute4", commonMW.mid1, commonMW.mid4, UserController.basicCode4)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+const createUser= async function (req, res) {
+    let data= req.body
+    let savedData= await UserModel.create(data)
+    res.send({msg: savedData})
+}
+
+const getUsersData= async function (req, res) {
+    let allUsers= await UserModel.find()
+    res.send({msg: allUsers})
+}
+
+module.exports.createUser= createUser
+module.exports.getUsersData= getUsersData
+module.exports.basicCode= basicCode
